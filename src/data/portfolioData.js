@@ -92,7 +92,7 @@ I am currently pursuing a degree in Computer Science with a focus on data scienc
         },
         {
             title: 'Concurrent Banking System',
-            image: '/images/BankingSystem.png',
+            image: '/images/banking_system.png',
             duration: 'Aug 2025 - Nov 2025',
             category: 'C++ APPLICATION',
             description:
