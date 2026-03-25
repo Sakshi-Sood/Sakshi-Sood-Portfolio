@@ -1,5 +1,6 @@
 export const portfolioData = {
     name: 'Sakshi Sood',
+    initials: 'SS',
     profileImage: '/images/profilePicture.jpeg',
     title: 'Software Developer | Machine Learning Enthusiast',
     intro:
@@ -17,6 +18,34 @@ I am currently pursuing a degree in Computer Science with a focus on data scienc
         'Data Analysis',
         'Scalable Web Systems',
     ],
+    aboutPrinciples: [
+        {
+            title: 'FOCUS',
+            text: 'Prioritizing efficiency and objective logic in every challenge.',
+            rotationClass: 'rotate-0 md:-rotate-3',
+        },
+        {
+            title: 'GROWTH',
+            text: 'Continuously improving my understanding of systems, algorithms, and engineering practices.',
+            rotationClass: 'rotate-0 md:rotate-1',
+        },
+        {
+            title: 'CRAFT',
+            text: 'Writing clean, maintainable code and building software that is reliable and scalable.',
+            rotationClass: 'rotate-0 md:-rotate-2',
+        },
+    ],
+    navigation: {
+        brandName: 'Sakshi Sood',
+        brandInitials: 'SS',
+        items: [
+            { label: 'Home', id: 'home' },
+            { label: 'About', id: 'about' },
+            { label: 'Skills', id: 'skills' },
+            { label: 'Projects', id: 'projects' },
+            { label: 'Contact', id: 'contact' },
+        ],
+    },
     socialLinks: {
         github: 'https://github.com/sakshi-sood',
         linkedin: 'https://linkedin.com/in/sakshi-sood11',
@@ -105,6 +134,7 @@ I am currently pursuing a degree in Computer Science with a focus on data scienc
     training: [
         {
             title: 'ByteXL – Data Structures and Algorithms Training',
+            issuer: 'ByteXL',
             points: [
                 'Completed a six-week training program covering core data structures and algorithms.',
                 'Strengthened analytical and problem-solving ability by solving 300+ structured DSA problems.',
@@ -177,36 +207,97 @@ I am currently pursuing a degree in Computer Science with a focus on data scienc
     ],
     activities: [
         {
+            badge: 'Hackathon',
+            badgeColor: '#a78bfa',
+            title: 'Infotsav Hackathon Finalist',
+            org: 'ABV-IIITM Gwalior',
+            date: 'Oct 2025',
+            image: '/extra-curricular/gwalior-hackatron.jpg',
             quote: "Finalist in Infotsav'25 Hackathon, ranked among top 50 teams out of 800+ participants.",
             name: "Infotsav Hackathon Finalist",
             designation: "Top 50 / 800+ teams • ABV-IIITM Gwalior",
             src: "/extra-curricular/gwalior-hackatron.jpg"
         },
         {
+            badge: 'Event',
+            badgeColor: '#2dd4bf',
+            title: 'Dark Code Derby',
+            org: 'Campus',
+            date: 'Apr 2024',
+            image: '/extra-curricular/DarkCodeDerby.png',
             quote: "Participated in Dark Code Derby coding event and solved competitive programming challenges",
             name: "Dark Code Derby Event",
             src: "/extra-curricular/DarkCodeDerby.png"
         },
         {
+            badge: 'Community',
+            badgeColor: '#60a5fa',
+            title: 'AWS Student Community Day',
+            org: 'Amazon Web Services',
+            date: 'Dec 2025',
+            image: '/extra-curricular/aws-student-community-day-participant.png',
             quote: "Earned an AWS badge for cloud learning and practical foundational knowledge.",
             name: "AWS Student Community Day",
             src: "/extra-curricular/aws-student-community-day-participant.png"
         },
         {
+            badge: 'Challenge',
+            badgeColor: '#34d399',
+            title: 'GFG 160-Day Challenge',
+            org: 'GeeksforGeeks',
+            date: '2024-2025',
+            image: '/extra-curricular/GFG-bag.jpeg',
             quote: "Earned a GFG bag and certificate for active participation in coding challenges for 160 days",
             name: "GeeksforGeeks 160-Day Challenge",
             src: "/extra-curricular/GFG-bag.jpeg"
         },
         {
+            badge: 'Hackathon',
+            badgeColor: '#a78bfa',
+            title: 'Code Off Duty Hackathon',
+            org: 'Campus Event',
+            date: '2024',
+            image: '/extra-curricular/Hackathon.png',
             quote: "Code Off Duty Hackathon participant, building a project in a team of 4 within 24 hours and learning to collaborate under pressure.",
             name: "Code Off Duty Hackathon",
             src: "/extra-curricular/Hackathon.png"
         }, {
+            badge: 'Course',
+            badgeColor: '#fb7185',
+            title: 'Graph Theory Programming Camp',
+            org: 'AlgoUniversity + Codeforces',
+            date: '2025',
+            image: '/extra-curricular/algouniversity.jpeg',
             quote: "Participant in the Graphs Programming Camp under the mentorship of Codeforces Master, Manas Kumar Verma.",
             name: "AlgoUniversity Graphs Camp",
             src: "/extra-curricular/algouniversity.jpeg"
+        },
+        {
+            badge: 'Hackathon',
+            badgeColor: '#a78bfa',
+            title: 'Codestorm Hackathon',
+            org: 'Spirit Organisation x MLSA',
+            date: '2024',
+            image: '/extra-curricular/codestorm-hackathon.png',
+            quote: "Participated in Code Storm — a 36-hour hackathon organized by Spirit Organisation in collaboration with Microsoft Learn Student Ambassadors. Worked under time pressure to ideate, build, and ship a project end-to-end, gaining hands-on experience in rapid prototyping and collaborative problem-solving.",
+            name: "Codestorm Hackathon",
+            src: "/extra-curricular/codestorm-hackathon.png"
+        },
+        {
+            badge: 'Session',
+            badgeColor: '#fbbf24',
+            title: 'TECH-A-ZON : A session on Git and GitHub',
+            org: 'Changemakers of Amazon',
+            date: '2024',
+            image: '/extra-curricular/tech-a-zon-session.jpeg',
+            quote: "Attended a session on Git and GitHub, gaining insights into version control and collaborative development.",
+            name: "TECH-A-ZON Session",
+            src: "/extra-curricular/tech-a-zon-session.jpeg"
         }
     ],
+    footer: {
+        text: 'Designed and coded with Care.',
+    },
     education: [
         {
             degree: 'Bachelor of Technology – Computer Science Engineering',
