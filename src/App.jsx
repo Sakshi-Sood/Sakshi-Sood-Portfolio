@@ -7,7 +7,6 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Training from './components/Training';
 import Certifications from './components/Certifications';
-import Achievements from './components/Achievements';
 import ActivitiesSection from './components/ActivitiesSection';
 import Education from './components/Education';
 import Contact from './components/Contact';
@@ -45,7 +44,7 @@ const App = () => {
                 <EmailSidebar email={portfolioData.contact?.email} />
 
                 {/* Sticky Navigation */}
-                <Navbar />
+                <Navbar data={portfolioData} />
 
                 {/* Main Portfolio Sections */}
                 <main>
@@ -55,13 +54,13 @@ const App = () => {
                     <Projects data={portfolioData} />
                     <Training data={portfolioData} />
                     <Certifications data={portfolioData} />
-                    <ActivitiesSection />
+                    <ActivitiesSection data={portfolioData} />
                     <Education data={portfolioData} />
                     <Contact data={portfolioData} />
                 </main>
 
                 {/* Footer */}
-                <Footer />
+                <Footer data={portfolioData} />
             </div>
         </div>
     );

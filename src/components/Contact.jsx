@@ -27,33 +27,33 @@ const Contact = ({ data }) => {
                     whileHover={{ scale: 1.05, y: -5 }}
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.45 }}
-                    className="glass-card space-y-4 p-6 transition-all duration-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]"
+                    className="glass-card space-y-4 p-6 transition-all duration-300 hover:shadow-[0_0_20px_rgba(129,140,248,0.2)]"
                     onSubmit={handleSubmit}
                 >
                     <input
                         type="text"
                         placeholder="Name"
-                        className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/40"
+                        className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
                     />
                     <input
                         type="email"
                         placeholder="Email"
-                        className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/40"
+                        className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
                     />
                     <textarea
                         placeholder="Message"
                         rows={5}
-                        className="min-h-[160px] w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/40"
+                        className="min-h-[160px] w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
                     />
                     <button
                         type="submit"
-                        className="rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 px-5 py-3 font-medium text-slate-900 transition duration-300 hover:scale-105 hover:shadow-lg"
+                        className="rounded-lg bg-gradient-to-r from-violet-400 to-indigo-500 px-5 py-3 font-medium text-slate-900 transition duration-300 hover:scale-105 hover:shadow-lg"
                     >
                         Send Message
                     </button>
 
                     {isSubmitted && (
-                        <p className="text-sm text-cyan-300">
+                        <p className="text-sm text-violet-300">
                             Thanks for reaching out! I'll get back to you soon.
                         </p>
                     )}
@@ -65,13 +65,13 @@ const Contact = ({ data }) => {
                     whileHover={{ scale: 1.05, y: -5 }}
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.45, delay: 0.1 }}
-                    className="glass-card p-6 transition-all duration-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]"
+                    className="glass-card p-6 transition-all duration-300 hover:shadow-[0_0_20px_rgba(129,140,248,0.2)]"
                 >
                     <h3 className="text-xl font-semibold">Contact Details</h3>
                     <div className="mt-4 space-y-3 text-slate-300">
                         <a
                             href={data.socialLinks.email}
-                            className="flex items-center gap-3 transition duration-300 hover:translate-x-1 hover:text-cyan-400"
+                            className="flex items-center gap-3 transition duration-300 hover:translate-x-1 hover:text-violet-400"
                         >
                             <FaEnvelope /> {data.contact.email}
                         </a>
@@ -82,7 +82,7 @@ const Contact = ({ data }) => {
                             href={data.socialLinks.linkedin}
                             target="_blank"
                             rel="noreferrer"
-                            className="flex items-center gap-3 transition duration-300 hover:translate-x-1 hover:text-cyan-400"
+                            className="flex items-center gap-3 transition duration-300 hover:translate-x-1 hover:text-violet-400"
                         >
                             <FaLinkedin /> LinkedIn
                         </a>
@@ -90,7 +90,7 @@ const Contact = ({ data }) => {
                             href={data.socialLinks.github}
                             target="_blank"
                             rel="noreferrer"
-                            className="flex items-center gap-3 transition duration-300 hover:translate-x-1 hover:text-cyan-400"
+                            className="flex items-center gap-3 transition duration-300 hover:translate-x-1 hover:text-violet-400"
                         >
                             <FaGithub /> GitHub
                         </a>

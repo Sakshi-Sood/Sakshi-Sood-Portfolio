@@ -51,6 +51,69 @@ const iconMap = {
     "Computer Science Fundamentals": FaBookOpen,
 };
 
+/* ── Category color identity system ── */
+const categoryColors = {
+    "Programming Languages": {
+        accent: "#a78bfa",       // violet-400
+        accentBg: "rgba(167, 139, 250, 0.12)",
+        accentBorder: "rgba(167, 139, 250, 0.35)",
+        chipHoverBg: "rgba(167, 139, 250, 0.18)",
+        chipHoverBorder: "rgba(167, 139, 250, 0.50)",
+        glowShadow: "rgba(167, 139, 250, 0.25)",
+        featured: true,
+    },
+    "Web Development": {
+        accent: "#2dd4bf",       // teal-400
+        accentBg: "rgba(45, 212, 191, 0.12)",
+        accentBorder: "rgba(45, 212, 191, 0.35)",
+        chipHoverBg: "rgba(45, 212, 191, 0.18)",
+        chipHoverBorder: "rgba(45, 212, 191, 0.50)",
+        glowShadow: "rgba(45, 212, 191, 0.25)",
+    },
+    Databases: {
+        accent: "#60a5fa",       // blue-400
+        accentBg: "rgba(96, 165, 250, 0.12)",
+        accentBorder: "rgba(96, 165, 250, 0.35)",
+        chipHoverBg: "rgba(96, 165, 250, 0.18)",
+        chipHoverBorder: "rgba(96, 165, 250, 0.50)",
+        glowShadow: "rgba(96, 165, 250, 0.25)",
+    },
+    "Data Analysis & Machine Learning": {
+        accent: "#f97316",       // orange-500
+        accentBg: "rgba(249, 115, 22, 0.12)",
+        accentBorder: "rgba(249, 115, 22, 0.35)",
+        chipHoverBg: "rgba(249, 115, 22, 0.18)",
+        chipHoverBorder: "rgba(249, 115, 22, 0.50)",
+        glowShadow: "rgba(249, 115, 22, 0.25)",
+    },
+    "Tools & Platforms": {
+        accent: "#f472b6",       // pink-400
+        accentBg: "rgba(244, 114, 182, 0.12)",
+        accentBorder: "rgba(244, 114, 182, 0.35)",
+        chipHoverBg: "rgba(244, 114, 182, 0.18)",
+        chipHoverBorder: "rgba(244, 114, 182, 0.50)",
+        glowShadow: "rgba(244, 114, 182, 0.25)",
+    },
+    "Soft Skills": {
+        accent: "#34d399",       // emerald-400
+        accentBg: "rgba(52, 211, 153, 0.12)",
+        accentBorder: "rgba(52, 211, 153, 0.35)",
+        chipHoverBg: "rgba(52, 211, 153, 0.18)",
+        chipHoverBorder: "rgba(52, 211, 153, 0.50)",
+        glowShadow: "rgba(52, 211, 153, 0.25)",
+        isSoftSkill: true,
+    },
+};
+
+const defaultColor = {
+    accent: "#818cf8",
+    accentBg: "rgba(129, 140, 248, 0.12)",
+    accentBorder: "rgba(129, 140, 248, 0.35)",
+    chipHoverBg: "rgba(129, 140, 248, 0.18)",
+    chipHoverBorder: "rgba(129, 140, 248, 0.50)",
+    glowShadow: "rgba(129, 140, 248, 0.25)",
+};
+
 const skillIconMap = {
     C: SiC,
     "C++": SiCplusplus,
@@ -137,57 +200,179 @@ const normalizeSkillKey = (value) => {
     return trimmed;
 };
 
+/* ── Animation variants ── */
+const containerVariants = {
+    hidden: {},
+    visible: {
+        transition: { staggerChildren: 0.1 },
+    },
+};
+
+const cardVariants = {
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+    },
+};
+
+const chipVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: (i) => ({
+        opacity: 1,
+        scale: 1,
+        transition: { delay: i * 0.04, duration: 0.3, ease: "easeOut" },
+    }),
+};
+
+/* ── Soft Skill Pill Component ── */
+const SoftSkillPill = ({ skill, accentColor, index }) => (
+    <motion.span
+        custom={index}
+        variants={chipVariants}
+        className="skill-chip skill-chip--soft"
+        style={{
+            "--cat-accent": accentColor,
+        }}
+        whileHover={{ scale: 1.07, y: -2 }}
+    >
+        <span
+            className="skill-chip-dot"
+            style={{ backgroundColor: accentColor }}
+        />
+        <span className="skill-chip-label">{skill}</span>
+    </motion.span>
+);
+
+SoftSkillPill.propTypes = {
+    skill: PropTypes.string.isRequired,
+    accentColor: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
+};
+
+/* ── Tech Skill Chip Component ── */
+const TechSkillChip = ({ skill, catColors, index }) => {
+    const key = normalizeSkillKey(skill);
+    const SkillIcon = skillIconMap[key];
+    const iconColor = skillIconColorMap[key] || "#818cf8";
+
+    return (
+        <motion.span
+            custom={index}
+            variants={chipVariants}
+            className="skill-chip skill-chip--tech"
+            style={{
+                "--cat-hover-bg": catColors.chipHoverBg,
+                "--cat-hover-border": catColors.chipHoverBorder,
+                "--cat-accent": catColors.accent,
+            }}
+            whileHover={{ scale: 1.07, y: -2 }}
+        >
+            {SkillIcon ? (
+                <SkillIcon
+                    className="skill-chip-icon"
+                    style={{ color: iconColor }}
+                    aria-hidden="true"
+                />
+            ) : null}
+            <span className="skill-chip-label">{skill}</span>
+        </motion.span>
+    );
+};
+
+TechSkillChip.propTypes = {
+    skill: PropTypes.string.isRequired,
+    catColors: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
+};
+
+/* ── Main Skills Component ── */
 const Skills = ({ data }) => {
     return (
         <section id="skills" className="section-shell skills-section py-20">
-            {/* Skills Section */}
             <SectionHeading
                 title="Tools & Technologies"
                 subtitle="Core technologies and tools I actively use"
             />
 
-            <div className="skills-grid">
-                {data.skills.map((group, idx) => {
+            <motion.div
+                className="skills-grid"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+            >
+                {data.skills.map((group) => {
                     const Icon = iconMap[group.category] || FaCode;
+                    const colors = categoryColors[group.category] || defaultColor;
+                    const isFeatured = colors.featured;
+                    const isSoft = colors.isSoftSkill;
+
                     return (
                         <motion.article
                             key={group.category}
-                            initial={{ opacity: 0, y: 24 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            whileHover={{ scale: 1.05, y: -5 }}
-                            viewport={{ once: true, amount: 0.2 }}
-                            transition={{ duration: 0.45, delay: idx * 0.08 }}
-                            className="glass-card skill-card hover:shadow-[0_0_20px_rgba(34,211,238,0.2)] transition-all duration-300"
+                            variants={cardVariants}
+                            whileHover={{ y: -6 }}
+                            className={`skill-card-v2 ${isFeatured ? "skill-card-v2--featured" : ""}`}
+                            style={{
+                                "--cat-accent": colors.accent,
+                                "--cat-accent-bg": colors.accentBg,
+                                "--cat-accent-border": colors.accentBorder,
+                                "--cat-glow": colors.glowShadow,
+                            }}
                         >
-                            <div className="mb-4 flex items-center gap-3">
-                                <Icon className="text-primary" size={20} />
-                                <h3 className="bg-gradient-to-r from-cyan-200 via-cyan-400 to-blue-500 bg-clip-text text-xl font-semibold text-transparent">
+                            {/* Top accent line */}
+                            <div className="skill-card-accent-line" />
+
+                            {/* Header with icon chip */}
+                            <div className="skill-card-header">
+                                <span
+                                    className="skill-card-icon-chip"
+                                    style={{
+                                        backgroundColor: colors.accentBg,
+                                        color: colors.accent,
+                                        border: `1px solid ${colors.accentBorder}`,
+                                    }}
+                                >
+                                    <Icon size={16} />
+                                </span>
+                                <h3 className="skill-card-title">
                                     {group.category}
                                 </h3>
                             </div>
-                            <div className="flex flex-wrap gap-2">
-                                {group.items.map((skill) => {
-                                    const key = normalizeSkillKey(skill);
-                                    const SkillIcon = skillIconMap[key];
-                                    const iconColor = skillIconColorMap[key] || "#22d3ee";
-                                    return (
-                                        <span key={skill} className="skill-chip">
-                                            {SkillIcon ? (
-                                                <SkillIcon
-                                                    className="skill-chip-icon"
-                                                    style={{ color: iconColor }}
-                                                    aria-hidden="true"
-                                                />
-                                            ) : null}
-                                            <span className="skill-chip-label">{skill}</span>
-                                        </span>
-                                    );
-                                })}
-                            </div>
+
+                            {/* Skills chips */}
+                            <motion.div
+                                className="skill-card-chips"
+                                variants={containerVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                            >
+                                {group.items.map((skill, i) =>
+                                    isSoft ? (
+                                        <SoftSkillPill
+                                            key={skill}
+                                            skill={skill}
+                                            accentColor={colors.accent}
+                                            index={i}
+                                        />
+                                    ) : (
+                                        <TechSkillChip
+                                            key={skill}
+                                            skill={skill}
+                                            catColors={colors}
+                                            index={i}
+                                        />
+                                    )
+                                )}
+                            </motion.div>
                         </motion.article>
                     );
                 })}
-            </div>
+            </motion.div>
         </section>
     );
 };

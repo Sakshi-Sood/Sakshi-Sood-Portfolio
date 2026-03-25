@@ -37,7 +37,7 @@ const FeaturedProject = ({
         >
             <div className="grid items-center gap-8 md:grid-cols-12 md:gap-10 lg:gap-12">
                 <div className={`relative md:col-span-7 ${imageOrderClass}`}>
-                    <div className="relative overflow-hidden rounded-xl border border-white/10 shadow-xl shadow-cyan-500/10 transition duration-500 group-hover:shadow-[0_24px_60px_rgba(34,211,238,0.16)]">
+                    <div className="relative overflow-hidden rounded-xl border border-white/10 shadow-xl shadow-violet-500/10 transition duration-500 group-hover:shadow-[0_24px_60px_rgba(129,140,248,0.16)]">
                         {image ? (
                             <img
                                 src={image}
@@ -57,7 +57,7 @@ const FeaturedProject = ({
                 <div
                     className={`relative flex flex-col ${contentOrderClass} md:col-span-5 ${contentAlignClass}`}
                 >
-                    <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-cyan-400">
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-violet-400">
                         Featured Project
                     </p>
                     {category && (
@@ -92,7 +92,7 @@ const FeaturedProject = ({
                         {techStack.map((tech) => (
                             <span
                                 key={tech}
-                                className="rounded-full border border-white/10 px-3 py-1 text-sm text-cyan-400 transition duration-300 hover:border-cyan-400 hover:text-cyan-300"
+                                className="rounded-full border border-white/10 px-3 py-1 text-sm text-violet-400 transition duration-300 hover:border-violet-400 hover:text-violet-300"
                             >
                                 {tech}
                             </span>
@@ -104,7 +104,7 @@ const FeaturedProject = ({
                             href={githubLink}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-2 text-slate-300 transition duration-300 hover:-translate-y-1 hover:text-cyan-400"
+                            className="inline-flex items-center gap-2 text-slate-300 transition duration-300 hover:-translate-y-1 hover:text-violet-400"
                             aria-label={`${title} GitHub repository`}
                         >
                             <FiGithub size={18} />
@@ -116,7 +116,7 @@ const FeaturedProject = ({
                                 href={liveLink}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="inline-flex items-center gap-2 text-slate-300 transition duration-300 hover:-translate-y-1 hover:text-cyan-400"
+                                className="inline-flex items-center gap-2 text-slate-300 transition duration-300 hover:-translate-y-1 hover:text-violet-400"
                                 aria-label={`${title} live demo`}
                             >
                                 <FiExternalLink size={18} />

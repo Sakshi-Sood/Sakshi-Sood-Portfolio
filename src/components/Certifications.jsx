@@ -44,17 +44,17 @@ const Certifications = ({ data }) => {
                                         <img
                                             src={cert.image}
                                             alt={`${cert.title} badge`}
-                                            className="h-full w-full object-contain drop-shadow-[0_15px_25px_rgba(34,211,238,0.3)] transition-transform duration-500 group-hover:scale-105"
+                                            className="h-full w-full object-contain drop-shadow-[0_15px_25px_rgba(129,140,248,0.3)] transition-transform duration-500 group-hover:scale-105"
                                         />
                                     ) : (
-                                        <div className="flex h-full w-full flex-col items-center justify-center rounded-full border border-cyan-500/30 bg-slate-800/50 text-slate-400">
-                                            <FiCheckCircle className="mb-2 text-4xl text-cyan-400" />
+                                        <div className="flex h-full w-full flex-col items-center justify-center rounded-full border border-violet-500/30 bg-slate-800/50 text-slate-400">
+                                            <FiCheckCircle className="mb-2 text-4xl text-violet-400" />
                                             <p className="text-sm">Preview not available</p>
                                         </div>
                                     )}
                                 </div>
 
-                                <div className="absolute inset-0 flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-full border border-cyan-500/30 bg-[#061824]/95 p-6 text-center shadow-xl backdrop-blur-sm [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                                <div className="absolute inset-0 flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-full border border-violet-500/30 bg-[#110827]/95 p-6 text-center shadow-xl backdrop-blur-sm [backface-visibility:hidden] [transform:rotateY(180deg)]">
                                     <p className="line-clamp-3 text-sm leading-relaxed text-slate-300 sm:text-sm">
                                         {cert.description}
                                     </p>
@@ -62,7 +62,7 @@ const Certifications = ({ data }) => {
                                         {(cert.skills || []).slice(0, 2).map((skill) => (
                                             <span
                                                 key={skill}
-                                                className="rounded-full border border-cyan-700/50 bg-cyan-900/50 px-2 py-0.5 text-[10px] text-cyan-300"
+                                                className="rounded-full border border-violet-700/50 bg-violet-900/50 px-2 py-0.5 text-[10px] text-violet-300"
                                             >
                                                 {skill}
                                             </span>
@@ -74,7 +74,7 @@ const Certifications = ({ data }) => {
                                                 href={getPreviewLink(cert)}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="relative z-10 inline-flex items-center gap-1.5 rounded-full border border-cyan-500/50 bg-cyan-500/20 px-3.5 py-1.5 text-xs font-semibold text-cyan-100 transition-colors hover:bg-cyan-500/40 hover:text-white"
+                                                className="relative z-10 inline-flex items-center gap-1.5 rounded-full border border-violet-500/50 bg-violet-500/20 px-3.5 py-1.5 text-xs font-semibold text-violet-100 transition-colors hover:bg-violet-500/40 hover:text-white"
                                             >
                                                 Verify
                                                 <FiExternalLink size={14} />
@@ -94,7 +94,7 @@ const Certifications = ({ data }) => {
                             <h3 className="text-xl font-bold leading-tight text-white">
                                 {cert.title}
                             </h3>
-                            <p className="text-md font-medium tracking-wide text-cyan-400">
+                            <p className="text-md font-medium tracking-wide text-violet-400">
                                 {cert.issuer}
                             </p>
                             {cert.issueDate && (
@@ -115,7 +115,7 @@ const Certifications = ({ data }) => {
                 >
                     <button
                         onClick={() => setShowAll(!showAll)}
-                        className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-cyan-500/50 bg-cyan-500/10 px-8 py-3 font-medium text-cyan-300 transition-all duration-300 hover:bg-cyan-500/20 hover:text-cyan-100 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]"
+                        className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-violet-500/50 bg-violet-500/10 px-8 py-3 font-medium text-violet-300 transition-all duration-300 hover:bg-violet-500/20 hover:text-violet-100 hover:shadow-[0_0_20px_rgba(129,140,248,0.2)]"
                     >
                         <span>{showAll ? "View Less" : "View More Credentials"}</span>
                     </button>

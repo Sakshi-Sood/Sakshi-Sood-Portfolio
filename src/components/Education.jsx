@@ -1,44 +1,128 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { GraduationCap, School } from "lucide-react";
+import { GraduationCap, School, MapPin } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
-const CardContent = ({ item, isLeft, Icon }) => {
-    return (
-        <motion.article
-            initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-md w-full px-5 py-4 flex flex-col justify-center rounded-xl border border-slate-800/60 bg-slate-900/40 backdrop-blur-sm group hover:border-cyan-500/30 hover:bg-slate-800/60 shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_10px_30px_-15px_rgba(34,211,238,0.15)] transition-all duration-300 relative overflow-hidden"
-        >
-            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-cyan-500/5 blur-[40px] group-hover:bg-cyan-500/15 transition-all duration-500" />
+const EducationCard = ({ item, index, Icon, isLast }) => {
+    const formattedIndex = String(index + 1).padStart(2, "0");
+    const isLeft = index % 2 === 0;
 
-            <div className="flex items-center gap-2 mb-2 relative z-10 w-full">
-                <h3 className="text-lg md:text-xl font-bold text-slate-100 leading-tight group-hover:text-cyan-100 transition-colors truncate">
-                    {item.degree}
-                </h3>
+    return (
+        <div className={`edu-tl-row ${isLeft ? "edu-tl-row--left" : "edu-tl-row--right"}`}>
+            {/* LEFT card slot */}
+            <div className="edu-tl-slot edu-tl-slot--left">
+                {isLeft && (
+                    <motion.article
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.55, delay: 0.1 }}
+                        className="edu-card"
+                    >
+                        <CardInner item={item} index={index} Icon={Icon} formattedIndex={formattedIndex} />
+                    </motion.article>
+                )}
             </div>
 
-            <p className="text-[11px] md:text-xs font-mono tracking-widest text-cyan-400/80 mb-2 relative z-10">
-                {item.graduation}
-            </p>
+            {/* CENTER spine */}
+            <div className="edu-tl-spine">
+                <motion.div
+                    className="edu-tl-node"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.4, delay: 0.15, type: "spring", stiffness: 260, damping: 20 }}
+                >
+                    <span className="edu-tl-node-dot" />
+                </motion.div>
+                {!isLast && (
+                    <motion.div
+                        className="edu-tl-connector"
+                        initial={{ scaleY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        viewport={{ once: true, amount: 0.1 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                    />
+                )}
+            </div>
 
-            <h4 className="text-sm md:text-base font-medium text-slate-300 mb-2 relative z-10">
-                {item.institution}
-            </h4>
-
-            <p className="text-xs md:text-sm text-slate-500 font-light line-clamp-2 relative z-10">
-                {item.coursework}
-            </p>
-        </motion.article>
+            {/* RIGHT card slot */}
+            <div className="edu-tl-slot edu-tl-slot--right">
+                {!isLeft ? (
+                    <motion.article
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.55, delay: 0.1 }}
+                        className="edu-card"
+                    >
+                        <CardInner item={item} index={index} Icon={Icon} formattedIndex={formattedIndex} />
+                    </motion.article>
+                ) : (
+                    /* Duplicate for mobile: hidden on desktop, shown on mobile */
+                    <motion.article
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.55, delay: 0.1 }}
+                        className="edu-card edu-card--mobile-only"
+                    >
+                        <CardInner item={item} index={index} Icon={Icon} formattedIndex={formattedIndex} />
+                    </motion.article>
+                )}
+            </div>
+        </div>
     );
 };
 
-CardContent.propTypes = {
+const CardInner = ({ item, Icon, formattedIndex }) => (
+    <>
+        <div className="edu-card-glow" />
+
+        {/* Top row: icon + date + index */}
+        <div className="edu-card-top">
+            <div className="edu-card-icon-box">
+                <Icon className="edu-card-icon" />
+            </div>
+            <span className="edu-card-date">{item.graduation}</span>
+            <span className="edu-card-index">{formattedIndex}</span>
+        </div>
+
+        {/* Degree title */}
+        <h3 className="edu-card-degree">{item.degree}</h3>
+
+        {/* Institution + location */}
+        <p className="edu-card-institution">{item.institution}</p>
+
+        {item.location && (
+            <div className="edu-card-location">
+                <MapPin className="edu-card-location-icon" />
+                <span>{item.location}</span>
+            </div>
+        )}
+
+        {/* Score badge */}
+        <div className="edu-card-badge-row">
+            <span className="edu-card-badge">
+                <span className="edu-card-badge-dot" />
+                {item.coursework}
+            </span>
+        </div>
+    </>
+);
+
+CardInner.propTypes = {
     item: PropTypes.object.isRequired,
-    isLeft: PropTypes.bool.isRequired,
     Icon: PropTypes.elementType.isRequired,
+    formattedIndex: PropTypes.string.isRequired,
+    index: PropTypes.number,
+};
+
+EducationCard.propTypes = {
+    item: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
+    Icon: PropTypes.elementType.isRequired,
+    isLast: PropTypes.bool.isRequired,
 };
 
 const Education = ({ data }) => {
@@ -49,47 +133,27 @@ const Education = ({ data }) => {
                 subtitle="Academic timeline and relevant coursework"
             />
 
-            <div className="relative max-w-5xl mx-auto mt-16 w-full">
-                {/* Vertical Line */}
-                <div className="absolute left-1/2 top-0 h-full w-[2px] bg-cyan-400/30 transform -translate-x-1/2" />
+            <div className="edu-tl-wrapper">
+                {/* Central vertical line (static) */}
+                <div className="edu-tl-line-bg" />
 
-                <div className="space-y-10 md:space-y-12 flex flex-col py-6">
-                    {data.education.map((item, index) => {
-                        const isLeft = index % 2 === 0;
-                        const isDegree = item.degree.toLowerCase().includes("bachelor") || item.degree.toLowerCase().includes("b.tech") || item.degree.toLowerCase().includes("university");
-                        const Icon = isDegree ? GraduationCap : School;
+                {data.education.map((item, index) => {
+                    const isDegree =
+                        item.degree.toLowerCase().includes("bachelor") ||
+                        item.degree.toLowerCase().includes("b.tech") ||
+                        item.degree.toLowerCase().includes("university");
+                    const Icon = isDegree ? GraduationCap : School;
 
-                        return (
-                            <div key={item.degree} className="relative flex justify-between items-center w-full">
-
-                                {/* Left Side Component Container */}
-                                <div className="w-[45%] flex justify-end pl-2 pr-5 sm:pr-12">
-                                    {isLeft && (
-                                        <CardContent item={item} isLeft={isLeft} Icon={Icon} />
-                                    )}
-                                </div>
-
-                                {/* Center Timeline Icon */}
-                                <div className="absolute left-1/2 transform -translate-x-1/2 flex justify-center items-center z-20">
-                                    <motion.div
-                                        className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-900 border-2 border-cyan-400/80 shadow-[0_0_15px_rgba(34,211,238,0.5)] flex items-center justify-center text-cyan-400"
-                                        animate={{ boxShadow: ["0 0 10px rgba(34,211,238,0.4)", "0 0 20px rgba(34,211,238,0.7)", "0 0 10px rgba(34,211,238,0.4)"] }}
-                                        transition={{ repeat: Infinity, duration: 2 }}
-                                    >
-                                        <Icon className="w-5 h-5 md:w-6 md:h-6" />
-                                    </motion.div>
-                                </div>
-
-                                {/* Right Side Component Container */}
-                                <div className="w-[45%] flex justify-start pl-5 sm:pl-12 pr-2">
-                                    {!isLeft && (
-                                        <CardContent item={item} isLeft={isLeft} Icon={Icon} />
-                                    )}
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
+                    return (
+                        <EducationCard
+                            key={item.degree}
+                            item={item}
+                            index={index}
+                            Icon={Icon}
+                            isLast={index === data.education.length - 1}
+                        />
+                    );
+                })}
             </div>
         </section>
     );

@@ -6,7 +6,7 @@ const CvPage = () => {
         <div className="app-root relative min-h-screen overflow-x-hidden bg-slate-950 py-12 sm:py-16">
             <div className="section-shell mx-auto max-w-5xl">
                 <div className="mb-8 flex items-center justify-between gap-4">
-                    <h1 className="bg-gradient-to-r from-cyan-200 via-cyan-400 to-blue-500 bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">
+                    <h1 className="bg-gradient-to-r from-violet-200 via-violet-400 to-indigo-500 bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">
                         Resume Preview
                     </h1>
                     <Link

@@ -39,7 +39,7 @@ const Hero = ({ data }) => {
 
                         <motion.h1
                             variants={fadeUpScale}
-                            className="theme-text hero-name text-5xl font-extrabold sm:text-6xl lg:text-7xl tracking-tight bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(34,211,238,0.2)] pb-1"
+                            className="theme-text hero-name text-5xl font-extrabold sm:text-6xl lg:text-7xl tracking-tight bg-gradient-to-r from-violet-400 to-indigo-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(129,140,248,0.2)] pb-1"
                         >
                             {data.name}
                         </motion.h1>
@@ -55,7 +55,7 @@ const Hero = ({ data }) => {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
                                     transition={{ duration: 0.4, ease: "easeOut" }}
-                                    className="text-xl font-bold tracking-wide text-cyan-400 sm:text-2xl"
+                                    className="text-xl font-bold tracking-wide text-violet-400 sm:text-2xl"
                                 >
                                     {titles[titleIndex]}
                                 </motion.h2>
@@ -75,7 +75,7 @@ const Hero = ({ data }) => {
                                 href="#projects"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="primary-btn rounded-xl px-7 py-3 font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.3)]"
+                                className="primary-btn rounded-xl px-7 py-3 font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(129,140,248,0.3)]"
                             >
                                 View Projects
                             </motion.a>
@@ -106,7 +106,7 @@ const Hero = ({ data }) => {
                                 }}
                                 className="h-full w-full"
                             >
-                                <div className="profile-img relative z-10 h-full w-full overflow-hidden rounded-[2rem] border border-cyan-500/20 shadow-[0_0_30px_rgba(34,211,238,0.15)] bg-slate-900/50">
+                                <div className="profile-img relative z-10 h-full w-full overflow-hidden rounded-[2rem] border border-violet-500/20 shadow-[0_0_30px_rgba(129,140,248,0.15)] bg-slate-900/50">
                                     {data.profileImage ? (
                                         <img
                                             src={data.profileImage}

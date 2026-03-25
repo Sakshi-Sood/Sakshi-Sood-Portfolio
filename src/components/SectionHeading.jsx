@@ -14,7 +14,7 @@ const SectionHeading = ({
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
-                className={`text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl bg-gradient-to-r from-cyan-200 via-cyan-400 to-blue-500 bg-clip-text text-transparent pb-1 ${titleClassName}`}
+                className={`text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl bg-gradient-to-r from-violet-200 via-violet-400 to-indigo-500 bg-clip-text text-transparent pb-1 ${titleClassName}`}
             >
                 {title}
             </motion.h2>

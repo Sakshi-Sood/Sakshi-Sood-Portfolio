@@ -1,16 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 
-const navItems = [
-    { label: "Home", id: "home" },
-    { label: "About", id: "about" },
-    { label: "Skills", id: "skills" },
-    { label: "Projects", id: "projects" },
-    { label: "Contact", id: "contact" },
-];
-
-const Navbar = () => {
+const Navbar = ({ data }) => {
+    const navItems = data.navigation?.items || [];
+    const brandName = data.navigation?.brandName || data.name;
+    const brandInitials = data.navigation?.brandInitials || data.initials || "";
     const headerRef = useRef(null);
     const lastScrollYRef = useRef(0);
     const [isOpen, setIsOpen] = useState(false);
@@ -177,7 +173,7 @@ const Navbar = () => {
         <>
             {/* Scroll progress indicator */}
             <div
-                className="fixed top-0 left-0 h-[2px] bg-cyan-400 z-[60] transition-all"
+                className="fixed top-0 left-0 h-[2px] bg-violet-500 z-[60] transition-all"
                 style={{ width: `${scrollProgress}%` }}
                 aria-hidden="true"
             />
@@ -189,11 +185,11 @@ const Navbar = () => {
                         onClick={(e) => onNavClick(e, "home")}
                         className="group inline-flex items-center gap-2 rounded-full px-2 py-1 transition duration-300"
                     >
-                        <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-cyan-400/40 bg-cyan-400/10 text-[11px] font-black tracking-wider text-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.25)] transition duration-300 group-hover:scale-105 group-hover:border-cyan-300/60 group-hover:text-cyan-200">
-                            SS
+                        <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-violet-400/40 bg-violet-500/10 text-[11px] font-black tracking-wider text-violet-300 shadow-[0_0_18px_rgba(129,140,248,0.25)] transition duration-300 group-hover:scale-105 group-hover:border-violet-300/60 group-hover:text-violet-200">
+                            {brandInitials}
                         </span>
-                        <span className="text-lg font-extrabold tracking-[0.08em] bg-gradient-to-r from-cyan-200 via-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-[0_0_14px_rgba(34,211,238,0.28)] transition duration-300">
-                            Sakshi Sood
+                        <span className="text-lg font-extrabold tracking-[0.08em] bg-gradient-to-r from-violet-200 via-violet-400 to-indigo-500 bg-clip-text text-transparent drop-shadow-[0_0_14px_rgba(129,140,248,0.28)] transition duration-300">
+                            {brandName}
                         </span>
                     </a>
 
@@ -202,7 +198,7 @@ const Navbar = () => {
                             type="button"
                             aria-label="Toggle theme"
                             onClick={toggleTheme}
-                            className="rounded-md border border-white/10 p-2 text-slate-200 transition duration-300 hover:border-cyan-400 hover:text-cyan-400 hover:rotate-12 hover:scale-110 hover:-translate-y-[2px]"
+                            className="rounded-md border border-white/10 p-2 text-slate-200 transition duration-300 hover:border-violet-400 hover:text-violet-400 hover:rotate-12 hover:scale-110 hover:-translate-y-[2px]"
                         >
                             {theme === "dark" ? <FiSun size={18} /> : <FiMoon size={18} />}
                         </button>
@@ -210,7 +206,7 @@ const Navbar = () => {
                             type="button"
                             aria-label="Toggle menu"
                             aria-expanded={isOpen}
-                            className="rounded-md p-2 text-slate-200 transition duration-300 hover:text-cyan-400 hover:scale-110 hover:-translate-y-[2px]"
+                            className="rounded-md p-2 text-slate-200 transition duration-300 hover:text-violet-400 hover:scale-110 hover:-translate-y-[2px]"
                             onClick={() => setIsOpen((prev) => !prev)}
                         >
                             {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -234,15 +230,15 @@ const Navbar = () => {
                                             className={
                                                 `relative text-sm font-medium transition duration-300 px-2 py-1 ` +
                                                 (isActive
-                                                    ? "text-cyan-400"
-                                                    : "text-slate-300 hover:text-cyan-400")
+                                                    ? "text-violet-400"
+                                                    : "text-slate-300 hover:text-violet-400")
                                             }
                                         >
                                             {item.label}
                                             {isActive && (
                                                 <motion.span
                                                     layoutId="activeSection"
-                                                    className="absolute -bottom-1 left-0 h-[2px] w-full bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"
+                                                    className="absolute -bottom-1 left-0 h-[2px] w-full bg-violet-500 rounded-full shadow-[0_0_8px_rgba(129,140,248,0.8)]"
                                                     transition={{
                                                         type: "spring",
                                                         stiffness: 380,
@@ -259,7 +255,7 @@ const Navbar = () => {
                             type="button"
                             aria-label="Toggle theme"
                             onClick={toggleTheme}
-                            className="rounded-md border border-white/10 p-2 text-slate-200 transition duration-300 hover:border-cyan-400 hover:text-cyan-400 hover:rotate-12 hover:scale-110 hover:-translate-y-[2px]"
+                            className="rounded-md border border-white/10 p-2 text-slate-200 transition duration-300 hover:border-violet-400 hover:text-violet-400 hover:rotate-12 hover:scale-110 hover:-translate-y-[2px]"
                         >
                             {theme === "dark" ? <FiSun size={18} /> : <FiMoon size={18} />}
                         </button>
@@ -287,8 +283,8 @@ const Navbar = () => {
                                             className={
                                                 "block rounded-lg px-2 py-2 text-sm font-medium transition duration-300 " +
                                                 (isActive
-                                                    ? "text-cyan-400"
-                                                    : "text-slate-200 hover:text-cyan-400")
+                                                    ? "text-violet-400"
+                                                    : "text-slate-200 hover:text-violet-400")
                                             }
                                         >
                                             {item.label}
@@ -305,6 +301,23 @@ const Navbar = () => {
             <div className="h-16" aria-hidden="true" />
         </>
     );
+};
+
+Navbar.propTypes = {
+    data: PropTypes.shape({
+        name: PropTypes.string,
+        initials: PropTypes.string,
+        navigation: PropTypes.shape({
+            brandName: PropTypes.string,
+            brandInitials: PropTypes.string,
+            items: PropTypes.arrayOf(
+                PropTypes.shape({
+                    label: PropTypes.string.isRequired,
+                    id: PropTypes.string.isRequired,
+                }),
+            ),
+        }),
+    }).isRequired,
 };
 
 export default Navbar;

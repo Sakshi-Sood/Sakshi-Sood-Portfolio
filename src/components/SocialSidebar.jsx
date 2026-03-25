@@ -36,7 +36,7 @@ const SocialSidebar = ({ links }) => {
             target="_blank"
             rel="noreferrer"
             aria-label={label}
-            className="text-slate-400 hover:text-cyan-400 hover:-translate-y-1 transition-all duration-300"
+            className="text-slate-400 hover:text-violet-400 hover:-translate-y-1 transition-all duration-300"
           >
             <Icon size={20} />
           </a>
