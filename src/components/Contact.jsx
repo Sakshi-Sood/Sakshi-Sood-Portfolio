@@ -5,11 +5,84 @@ import { FaEnvelope, FaGithub, FaLinkedin, FaPhoneAlt } from "react-icons/fa";
 import SectionHeading from "./SectionHeading";
 
 const Contact = ({ data }) => {
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    const [formValues, setFormValues] = useState({
+        name: "",
+        email: "",
+        message: "",
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [statusMessage, setStatusMessage] = useState("");
+    const [statusType, setStatusType] = useState("idle");
 
-    const handleSubmit = (event) => {
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormValues((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        setIsSubmitted(true);
+
+        const name = formValues.name.trim();
+        const email = formValues.email.trim();
+        const message = formValues.message.trim();
+
+        if (!name || !email || !message) {
+            setStatusType("error");
+            setStatusMessage("Please fill in all fields before sending.");
+            return;
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            setStatusType("error");
+            setStatusMessage("Please enter a valid email address.");
+            return;
+        }
+
+        if (!web3FormsAccessKey) {
+            setStatusType("error");
+            setStatusMessage("Form is not configured yet. Add VITE_WEB3FORMS_ACCESS_KEY in your .env file.");
+            return;
+        }
+
+        setIsSubmitting(true);
+        setStatusType("idle");
+        setStatusMessage("");
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    access_key: web3FormsAccessKey,
+                    subject: `Portfolio contact from ${name}`,
+                    from_name: name,
+                    name,
+                    email,
+                    message,
+                    replyto: email,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || "Something went wrong while sending your message.");
+            }
+
+            setStatusType("success");
+            setStatusMessage("Message sent successfully. Thanks for reaching out!");
+            setFormValues({ name: "", email: "", message: "" });
+        } catch (error) {
+            setStatusType("error");
+            setStatusMessage(error.message || "Unable to send message right now. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -32,31 +105,47 @@ const Contact = ({ data }) => {
                 >
                     <input
                         type="text"
+                        name="name"
                         placeholder="Name"
+                        value={formValues.name}
+                        onChange={handleInputChange}
+                        disabled={isSubmitting}
                         className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
                     />
                     <input
                         type="email"
+                        name="email"
                         placeholder="Email"
+                        value={formValues.email}
+                        onChange={handleInputChange}
+                        disabled={isSubmitting}
                         className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
                     />
                     <textarea
+                        name="message"
                         placeholder="Message"
                         rows={5}
+                        value={formValues.message}
+                        onChange={handleInputChange}
+                        disabled={isSubmitting}
                         className="min-h-[160px] w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
                     />
                     <button
                         type="submit"
+                        disabled={isSubmitting}
                         className="rounded-lg bg-gradient-to-r from-violet-400 to-indigo-500 px-5 py-3 font-medium text-slate-900 transition duration-300 hover:scale-105 hover:shadow-lg"
                     >
-                        Send Message
+                        {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
 
-                    {isSubmitted && (
-                        <p className="text-sm text-violet-300">
-                            Thanks for reaching out! I'll get back to you soon.
+                    {statusMessage ? (
+                        <p
+                            className={`text-sm ${statusType === "error" ? "text-rose-300" : "text-violet-300"
+                                }`}
+                        >
+                            {statusMessage}
                         </p>
-                    )}
+                    ) : null}
                 </motion.form>
 
                 <motion.div
