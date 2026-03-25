@@ -110,7 +110,7 @@ const Contact = ({ data }) => {
                         value={formValues.name}
                         onChange={handleInputChange}
                         disabled={isSubmitting}
-                        className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
+                        className="theme-field w-full rounded-lg px-4 py-3 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
                     />
                     <input
                         type="email"
@@ -119,7 +119,7 @@ const Contact = ({ data }) => {
                         value={formValues.email}
                         onChange={handleInputChange}
                         disabled={isSubmitting}
-                        className="w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
+                        className="theme-field w-full rounded-lg px-4 py-3 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
                     />
                     <textarea
                         name="message"
@@ -128,7 +128,7 @@ const Contact = ({ data }) => {
                         value={formValues.message}
                         onChange={handleInputChange}
                         disabled={isSubmitting}
-                        className="min-h-[160px] w-full rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
+                        className="theme-field min-h-[160px] w-full rounded-lg px-4 py-3 outline-none transition duration-300 focus:border-violet-400 focus:ring-2 focus:ring-violet-400/40"
                     />
                     <button
                         type="submit"

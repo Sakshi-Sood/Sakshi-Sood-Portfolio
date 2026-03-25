@@ -106,18 +106,20 @@ const Hero = ({ data }) => {
                                 }}
                                 className="h-full w-full"
                             >
-                                <div className="profile-img relative z-10 h-full w-full overflow-hidden rounded-[2rem] border border-violet-500/20 shadow-[0_0_30px_rgba(129,140,248,0.15)] bg-slate-900/50">
-                                    {data.profileImage ? (
-                                        <img
-                                            src={data.profileImage}
-                                            alt={`${data.name} profile`}
-                                            className="h-full w-full object-cover"
-                                        />
-                                    ) : (
-                                        <div className="theme-muted flex h-full items-center justify-center px-6 text-center text-sm">
-                                            Add your image path in portfolio data
-                                        </div>
-                                    )}
+                                <div className="hero-avatar-boundary relative z-10 h-full w-full rounded-full p-2 sm:p-2.5 lg:p-3">
+                                    <div className="profile-img relative h-full w-full overflow-hidden rounded-full bg-slate-900/50">
+                                        {data.profileImage ? (
+                                            <img
+                                                src={data.profileImage}
+                                                alt={`${data.name} profile`}
+                                                className="h-full w-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="theme-muted flex h-full items-center justify-center px-6 text-center text-sm">
+                                                Add your image path in portfolio data
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             </motion.div>
                         </motion.div>
