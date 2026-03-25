@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { FaEnvelope, FaGithub, FaLinkedin, FaPhoneAlt } from "react-icons/fa";
 import SectionHeading from "./SectionHeading";
@@ -14,6 +14,17 @@ const Contact = ({ data }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [statusMessage, setStatusMessage] = useState("");
     const [statusType, setStatusType] = useState("idle");
+
+    useEffect(() => {
+        if (!statusMessage) return;
+
+        const timeoutId = setTimeout(() => {
+            setStatusMessage("");
+            setStatusType("idle");
+        }, 3500);
+
+        return () => clearTimeout(timeoutId);
+    }, [statusMessage]);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -137,15 +148,6 @@ const Contact = ({ data }) => {
                     >
                         {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
-
-                    {statusMessage ? (
-                        <p
-                            className={`text-sm ${statusType === "error" ? "text-rose-300" : "text-violet-300"
-                                }`}
-                        >
-                            {statusMessage}
-                        </p>
-                    ) : null}
                 </motion.form>
 
                 <motion.div
@@ -197,6 +199,38 @@ const Contact = ({ data }) => {
                     </div>
                 </motion.div>
             </div>
+
+            <AnimatePresence>
+                {statusMessage ? (
+                    <motion.div
+                        role="alert"
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 16 }}
+                        transition={{ duration: 0.22 }}
+                        className={`fixed bottom-6 right-6 z-50 max-w-sm rounded-xl border px-4 py-3 shadow-lg backdrop-blur ${
+                            statusType === "error"
+                                ? "border-rose-400/40 bg-rose-500/15 text-rose-100"
+                                : "border-violet-400/40 bg-violet-500/15 text-violet-100"
+                        }`}
+                    >
+                        <div className="flex items-start justify-between gap-3">
+                            <p className="text-sm">{statusMessage}</p>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setStatusMessage("");
+                                    setStatusType("idle");
+                                }}
+                                className="text-base leading-none opacity-75 transition hover:opacity-100"
+                                aria-label="Close notification"
+                            >
+                                ×
+                            </button>
+                        </div>
+                    </motion.div>
+                ) : null}
+            </AnimatePresence>
         </section>
     );
 };
