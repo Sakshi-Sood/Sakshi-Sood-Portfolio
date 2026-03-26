@@ -26,14 +26,14 @@ const CvPage = () => {
                     <div className="overflow-hidden rounded-xl border border-slate-800">
                         <iframe
                             title="CV Preview"
-                            src="/public/resume.pdf"
+                            src="/resume.pdf"
                             className="h-[70vh] min-h-[480px] w-full bg-slate-950"
                         />
                     </div>
 
                     <div className="mt-5 flex flex-wrap gap-3">
                         <a
-                            href="/public/resume.pdf"
+                            href="/resume.pdf"
                             download
                             className="primary-btn inline-flex rounded-lg px-5 py-3 font-medium transition duration-300"
                         >
