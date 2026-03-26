@@ -80,7 +80,9 @@ const Hero = ({ data }) => {
                                 View Projects
                             </motion.a>
                             <motion.a
-                                href="/cv"
+                                href="/resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="secondary-btn rounded-xl px-7 py-3 font-semibold transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]"
